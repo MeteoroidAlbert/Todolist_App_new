@@ -3,6 +3,7 @@ import Todo from "./Todo";
 import { useAppContext } from "./AppProvider";
 import PageTitle from "./PageTitle";
 
+
 function Dashboard() {
     const [matter, setMatter] = useState("");  //保存Input的onChange內容
     const divUnderTodo = useRef(); //用於在待辦事件下生成空div以利後續scrollbar定位
@@ -40,9 +41,9 @@ function Dashboard() {
 
     //監聽todo/done變化以產生進度條數據
     const progress = useMemo(() => {
-        console.log("todo:", todo);
-        console.log("done:", done);
-        return todo.length === 0 ? 0 : Math.round((done.length / todo.length) * 100);
+        if (todo) {
+            return todo.length === 0 ? 0 : Math.round((done.length / todo.length) * 100);
+        }
     }, [todo, done])
 
 
@@ -100,6 +101,40 @@ function Dashboard() {
         }
     };
 
+
+    //處理新增事項清單頁
+    //思路: 每次只處理一個isVisible為false的頁籤，並變更為true，同時為了確保渲染時總是依照優先為true的資料進行渲染，因此後更改為true者應該把整筆資料調整到tasks內容的末端
+    //情境: page1、3為ture時，渲染頁籤顯示順序為1、3，當觸發此函式後，如果page2變成true，此時頁籤顯示順序應該為1、3、2而不是1、2、3
+    const addNewListPage = () => {
+        setTasks(prevState => {
+            const updatedTasks = { ...prevState };
+    
+            for (const page of ["page2", "page3"]) {
+                if (!updatedTasks[page].isVisible) {
+                    updatedTasks[page] = { 
+                        ...updatedTasks[page], 
+                        isVisible: true 
+                    };
+    
+                    const reOrderedTasks = {};
+                    Object.entries(updatedTasks)
+                        .filter(([key]) => key !== page) 
+                        .forEach(([key, value]) => {
+                            reOrderedTasks[key] = value;
+                        });
+                    reOrderedTasks[page] = updatedTasks[page]; 
+    
+                    return reOrderedTasks;
+                }
+            }
+    
+            return prevState;
+        });
+    };
+    
+    
+
+
     return (
         <div className="w-screen h-screen flex items-center justify-center">
             <div className="w-[500px] h-[700px] flex flex-col text-tertiary bg-gradient-to-b from-[#eef7fe] to-[#ecedff]">
@@ -109,9 +144,24 @@ function Dashboard() {
                     <h1 className=" text-3xl">Todo List</h1>
                     <p className="mb-4 text-sm">Add things to do</p>
                     {/*事項清單名稱*/}
-                    <PageTitle pageNo="page1" onClick={() => setPage("page1")} />
-                    <PageTitle pageNo="page2" onClick={() => setPage("page2")} />
-                    <PageTitle pageNo="page3" onClick={() => setPage("page3")} />
+                    {Object.keys(tasks).map(pageNo =>
+                        tasks[pageNo].isVisible && (
+                            <PageTitle
+                                key={pageNo}
+                                pageNo={pageNo}
+                                onClick={() => setPage(pageNo)}
+                            />
+                        )
+                    )}
+
+                    {(!tasks.page2.isVisible || !tasks.page3.isVisible) && (
+                        <button className="inline-block ml-2 relative top-[4px] rounded-full bg-primary" onClick={() => addNewListPage()}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.0} stroke="white" className="size-5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                    )}
+
                 </div>
 
 
