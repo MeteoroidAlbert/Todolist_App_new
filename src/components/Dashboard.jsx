@@ -1,52 +1,51 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Todo from "./Todo";
 import { useAppContext } from "./AppProvider";
+import PageTitle from "./PageTitle";
 
 function Dashboard() {
     const [matter, setMatter] = useState("");  //保存Input的onChange內容
     const divUnderTodo = useRef(); //用於在待辦事件下生成空div以利後續scrollbar定位
-    const inputOfListName = useRef(); //用來操作清單名稱input
-    const [readOnly, setReadOnly] = useState(true); //用於管理清單名稱可否被編輯
-    const { todo, setTodo, done, setDone, listName, setListName, moveToEnd, setMoveToEnd } = useAppContext();
+    const { tasks, setTasks, moveToEnd, setMoveToEnd, page, setPage } = useAppContext();
+    const [todo, setTodo] = useState(tasks[page].todo); //使用本地狀態保存部分全局狀態(hint: 某個Page的todo內容)
+    const [done, setDone] = useState(tasks[page].done); //同上(hint: 某個Page的done內容)
 
-    //監聽todo變化以定位scrollbar到新增的待辦事項
+    //監聽page變化進而調取tasks中不同page內的todo、done內容
+    //思路: page是顯示對應事項清單得依據
+    useEffect(() => {
+        const currentTodo = tasks[page].todo;
+        const currentDone = tasks[page].done;
+        setTodo(currentTodo);
+        setDone(currentDone);
+    }, [page])
+
+    //監聽todo變化用於定位scrollbar到新增的待辦事項、保存變化到tasks中
     useEffect(() => {
         if (divUnderTodo.current) {
             divUnderTodo.current.scrollIntoView({ behavior: "smooth" });
         }
+        const newTasks = { ...tasks };
+        newTasks[page].todo = todo;
+        setTasks(newTasks);
+
     }, [todo]);
+
+    //監聽done變化並將變化保存到tasks中
+    useEffect(() => {
+        const newTasks = { ...tasks };
+        newTasks[page].done = done;
+        setTasks(newTasks);
+
+    }, [done]);
 
     //監聽todo/done變化以產生進度條數據
     const progress = useMemo(() => {
-        return todo.length === 0 ? 0 : Math.floor((done.length / todo.length) * 100);
+        console.log("todo:", todo);
+        console.log("done:", done);
+        return todo.length === 0 ? 0 : Math.round((done.length / todo.length) * 100);
     }, [todo, done])
 
-    //監聽readOnly變化，尤其注意readOnly為false時，應該確保存取該次的修改內容
-    useEffect(() => {
-        if (!readOnly && inputOfListName.current) {
-            inputOfListName.current.focus();
-            inputOfListName.current.select();
-        }
-        else if (readOnly && inputOfListName.current) {
-            inputOfListName.current.blur();
-        }
-    }, [readOnly])
 
-
-
-
-
-
-    //處理重新命名事項清單與否
-    const handleListNamereadOnly = () => {
-        setReadOnly(prevState => !prevState);
-    }
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            handleListNamereadOnly();
-        }
-    }
 
     //處理新增待辦事項
     const handleAddTodo = (e) => {
@@ -64,11 +63,13 @@ function Dashboard() {
         setMatter("");
     }
 
+    //重置事項清單(包含清單名稱)
     const handleResetTodolist = () => {
         setTodo([]);
         setDone([]);
-        setListName("");
-        sessionStorage.removeItem("storageTitle");
+        const newTasks = { ...tasks };
+        newTasks[page].name = "";
+        setTasks(newTasks);
     }
 
 
@@ -80,11 +81,11 @@ function Dashboard() {
             return (
                 <>
                     {todo.filter((item) => !done.includes(item)).map((item) => (
-                        <Todo key={item} content={item} />
+                        <Todo key={item} content={item} todo={todo} done={done} setTodo={setTodo} setDone={setDone} />
                     ))}
                     <div ref={divUnderTodo} className="h-[1px]" />
                     {done.map((item) => (
-                        <Todo key={item} content={item} />
+                        <Todo key={item} content={item} todo={todo} done={done} setTodo={setTodo} setDone={setDone} />
                     ))}
                 </>
             );
@@ -92,7 +93,7 @@ function Dashboard() {
         else {
             return (
                 <>
-                    {todo.map((item) => <Todo key={item} content={item} />)}
+                    {todo.map((item) => <Todo key={item} content={item} todo={todo} done={done} setTodo={setTodo} setDone={setDone} />)}
                     <div ref={divUnderTodo} />
                 </>
             )
@@ -103,40 +104,14 @@ function Dashboard() {
         <div className="w-screen h-screen flex items-center justify-center">
             <div className="w-[500px] h-[700px] flex flex-col text-tertiary bg-gradient-to-b from-[#eef7fe] to-[#ecedff]">
 
-                {/*Logo與待辦事項清單名稱*/}
+                {/*Logo與事項清單名稱*/}
                 <div className="text-left mx-8  mt-10 border-b-2 border-border">
                     <h1 className=" text-3xl">Todo List</h1>
                     <p className="mb-4 text-sm">Add things to do</p>
-                    {/*待辦事項清單名稱*/}
-                    <div className="group inline-block relative">
-                        <input
-                            ref={inputOfListName}
-                            type="text"
-                            value={listName}
-                            onChange={(e) => setListName(e.target.value)}
-                            onKeyDown={e => handleKeyDown(e)}
-                            className={`w-[100px] border-2 border-border border-b-[#eef7fe] ml-2 -mb-1 p-1 pb-0 rounded-t-md hover:cursor-pointer ${readOnly ? "bg-transparent" : ""}`}
-                            readOnly={readOnly}
-                            placeholder="Untitle List..." />
-                        {/*編輯名稱按鈕*/}
-                        <div className={`absolute top-1 -right-6 cursor-pointer w-5 h-5 bg-primary rounded-full flex items-center justify-center
-                                transition-all duration-500 opacity-0 group-hover:opacity-100`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.0} stroke="white" 
-                                className="size-4"
-                                 onClick={() => handleListNamereadOnly()}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                            </svg>
-                        </div>
-                        {/*完成名稱編輯按鈕*/}
-                        <div className={`absolute top-1 -right-6 cursor-pointer w-5 h-5 bg-primary rounded-full flex items-center justify-center
-                                transition-all duration-500 ${readOnly ? "opacity-0 translate-x-4" : "opacity-100 translate-x-0"}`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="white"
-                                className="size-4"
-                                onClick={() => handleListNamereadOnly()}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                        </div>
-                    </div>
+                    {/*事項清單名稱*/}
+                    <PageTitle pageNo="page1" onClick={() => setPage("page1")} />
+                    <PageTitle pageNo="page2" onClick={() => setPage("page2")} />
+                    <PageTitle pageNo="page3" onClick={() => setPage("page3")} />
                 </div>
 
 

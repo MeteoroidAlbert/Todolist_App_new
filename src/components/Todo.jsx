@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAppContext } from "./AppProvider";
 
 
-function Todo({ content }) {
-    const { todo, setTodo, done, setDone, moveToEnd, setMoveToEnd } = useAppContext();
+function Todo({ content, todo, done, setTodo, setDone }) {
+    const { tasks, setTasks, moveToEnd, page } = useAppContext();
     const [editable, setEditable] = useState(false); //用於管理事項內容是否可編輯
     const doneRef = useRef(); //用於追蹤最新的done
     const divContentRef = useRef(); //用於追蹤正在編輯代辦/完成事項的div容器
@@ -12,6 +12,9 @@ function Todo({ content }) {
     //原因: setDone屬於非同步處理，函式中調用的done進行邏輯篩選時，如果done的變化本身不觸發渲染，那麼函式調用的done會是觸發setDone前的狀態內容
     useEffect(() => {
         doneRef.current = done;
+        const newTasks = {...tasks};
+        newTasks[page].done = done;
+        setTasks(newTasks);
     }, [done])
 
     useEffect(() => {
