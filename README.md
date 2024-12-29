@@ -1,13 +1,13 @@
 Todo List功能說明
 
 <p align="center">
-    <figure style="display: inline-block; text-align: center; margin: 10px;">
+    <figure style="display: inline-block; text-align: center; margin: 1px;">
         <img src="./images/todolist1.png" width="45%"/>
-        <figcaption>圖一</figcaption>
+        <figcaption>(圖一)</figcaption>
     </figure>
-    <figure style="display: inline-block; text-align: center; margin: 10px;">
+    <figure style="display: inline-block; text-align: center; margin: 1px;">
         <img src="./images/todolist2.png" width="45%"/>
-        <figcaption>圖二</figcaption>
+        <figcaption>(圖二)</figcaption>
     </figure>
 </p>
 
@@ -40,9 +40,9 @@ Todo List功能說明
 
 
 <p>
-    <figure style="display: inline-block; text-align: center; margin: 10px;">
+    <figure style="display: inline-block; text-align: center; margin: 1px;">
         <img src="./images/todolist3.png" width="45%"/>
-        <figcaption>圖三</figcaption>
+        <figcaption>(圖三)</figcaption>
     </figure>
 </p>
 
