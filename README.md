@@ -1,9 +1,16 @@
 Todo List功能說明
 
-![](./images/todolist1.png)
-**(圖一)**
-![](./images/todolist2.png)
-**(圖二)**
+<p align="center">
+    <figure style="display: inline-block; text-align: center; margin: 10px;">
+        <img src="./images/todolist1.png" width="45%"/>
+        <figcaption>圖一</figcaption>
+    </figure>
+    <figure style="display: inline-block; text-align: center; margin: 10px;">
+        <img src="./images/todolist2.png" width="45%"/>
+        <figcaption>圖二</figcaption>
+    </figure>
+</p>
+
 
 1\. 輸入框：輸入文字，按下「+」按鈕，將事項新增至上方列表，以事項加入的時間進行排序，新加入的排在下方；每加入一項，將滾動條自動滾至最下方。 
 
@@ -31,8 +38,14 @@ Todo List功能說明
 
 12\. 新增事項清單鈕：點擊後，新增一頁事項清單，最多支持三頁。點擊新標題頁籤將可切換到新清單頁面，清單之間內容相互獨立存在，如(圖三)。
 
-![](./images/todolist3.png)
-**(圖三)**
+
+<p>
+    <figure style="display: inline-block; text-align: center; margin: 10px;">
+        <img src="./images/todolist3.png" width="45%"/>
+        <figcaption>圖三</figcaption>
+    </figure>
+</p>
+
 
 13\. 關閉清單鈕：位於清單邊擊鈕(7)右側，點擊後，可將該頁清單關閉。(注意：會清除清單內待辦/完成事項、標題)
 
