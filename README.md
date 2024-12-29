@@ -1,15 +1,11 @@
 Todo List功能說明
 
-<div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-    <div style="text-align: center;">
-        <img src="./images/todolist1.png" width="40%"/>
-        <p><strong>(圖一)</strong></p>
-    </div>
-    <div style="text-align: center;">
-        <img src="./images/todolist2.png" width="40%"/>
-        <p><strong>(圖二)</strong></p>
-    </div>
-</div>
+### Todo List 功能說明
+
+| ![圖一](./images/todolist1.png) | ![圖二](./images/todolist2.png) |
+|:-------------------------------:|:-------------------------------:|
+| **(圖一)**                     | **(圖二)**                     |
+
 
 
 1\. 輸入框：輸入文字，按下「+」按鈕，將事項新增至上方列表，以事項加入的時間進行排序，新加入的排在下方；每加入一項，將滾動條自動滾至最下方。 
