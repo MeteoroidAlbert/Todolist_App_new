@@ -1,5 +1,3 @@
-Todo List功能說明
-
 ### Todo List 功能說明
 
 | ![圖一](./images/todolist1.png) | ![圖二](./images/todolist2.png) |
