@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+Todo List功能說明
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](./images/todolist1.png)
+**(圖一)**
+![](./images/todolist2.png)
+**(圖二)**
 
-## Available Scripts
+1\. 輸入框：輸入文字，按下「+」按鈕，將事項新增至上方列表，以事項加入的時間進行排序，新加入的排在下方；每加入一項，將滾動條自動滾至最下方。 
 
-In the project directory, you can run:
+2\. 勾選框：勾選列表內的事項，會將該事項的文字以橫槓劃上。 
 
-### `yarn start`
+3\. 刪除鈕：點選事項的刪除鈕，可刪除該事項。 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4\. 滾動條：位在事項列表右側，可以上下滾動，閱覽大量的事項。 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+5\. 進度條：已完成事項與待完成事項，計算完成率，數字精度取至整數位。 
 
-### `yarn test`
+6\. 切換鈕：打開後，會把已完成的事項排到列表最下方，未完成事項則在最上方；若再次關 閉切換鈕，列表的排序將回到原樣，以事項加入的時間進行排序。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+(按鈕打開下，完成事項除了會排列到列表最下方，排列的順序將是依照被勾選完成的順序進行排列)
 
-### `yarn build`
+7\. 清單標題編輯鈕：游標移動到清單標題上會出現編輯按鈕，點選後可以編輯標題，標題編輯完成後，再按一次新出現的完成編輯按鈕或者Enter按鍵能夠保存編輯後標題，如(圖二)。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+8\. 排序調整鈕：切換鈕(6)關閉時，游標移動到清單中任一事項上，該事項左側會出現排序調整按鈕，可以調整該待辦/完成事項的排序，如(圖一)。切換鈕開啟時，僅可進行待辦事項的排序調整，如(圖二)。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+9\. 事項編輯鈕：刪除鈕(3)左側為編輯事項內容按鈕，點擊可以更改該待辦/完成事項內容，但不影響排序。再次點擊該按鈕或者Enter按鍵可以結束並保存編輯內容。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+10\. 清除完成事項鈕：可以清除所有完成事項(注意：進度條會因為完成事項減少而變化)。
 
-### `yarn eject`
+11\. 重置清單鈕：將該頁事項清單重置，刪除所有待辦/完成事項、清單標題。
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+12\. 新增事項清單鈕：點擊後，新增一頁事項清單，最多支持三頁。點擊新標題頁籤將可切換到新清單頁面，清單之間內容相互獨立存在，如(圖三)。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](./images/todolist3.png)
+**(圖三)**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+13\. 關閉清單鈕：位於清單邊擊鈕(7)右側，點擊後，可將該頁清單關閉。(注意：會清除清單內待辦/完成事項、標題)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+14\. 持久化儲存：使用Session Storeage持久化儲存所有清單內容。(在不關閉該瀏覽器分頁為前提下)
