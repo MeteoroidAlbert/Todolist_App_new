@@ -2,11 +2,11 @@ Todo List功能說明
 
 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
     <div style="text-align: center;">
-        <img src="./images/todolist1.png" width="45%"/>
+        <img src="./images/todolist1.png" width="40%"/>
         <p><strong>(圖一)</strong></p>
     </div>
     <div style="text-align: center;">
-        <img src="./images/todolist2.png" width="45%"/>
+        <img src="./images/todolist2.png" width="40%"/>
         <p><strong>(圖二)</strong></p>
     </div>
 </div>
@@ -41,7 +41,7 @@ Todo List功能說明
 
 <p>
     <figure style="display: inline-block; text-align: center; margin: 1px;">
-        <img src="./images/todolist3.png" width="45%"/>
+        <img src="./images/todolist3.png" width="40%"/>
         <figcaption>(圖三)</figcaption>
     </figure>
 </p>
