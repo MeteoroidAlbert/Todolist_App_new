@@ -8,7 +8,10 @@ module.exports = {
         "secondary": "#cdd3f5",
         "tertiary": "#8c99bb",
         "border": "#b8c3d3",
-      }
+      },
+      backgroundImage: {
+        "custom-image": "url('/images/bg3.jpg')",
+      },
     },
   },
   plugins: [],

@@ -60,7 +60,7 @@ function PageTitle({ pageNo, onClick }) {
 
 
     return (
-        <div className={`group inline-block ml-1 relative top-[2px] rounded-md  ${pageNo === page ? "bg-[#eef7fe]" : "bg-white"}`} onClick={onClick}>
+        <div className={`group inline-block ml-1 relative top-[2px] rounded-md  ${pageNo === page ? "bg-transparent" : "bg-white opacity-85"}`} onClick={onClick}>
             <input
                 ref={inputOfListName}
                 type="text"
@@ -68,7 +68,7 @@ function PageTitle({ pageNo, onClick }) {
                 onChange={(e) => handleListNameChnage(e.target.value)}
                 onKeyDown={e => handleKeyDown(e)}
                 className={`w-[100px] border-2 border-border  ml-0 -mb-0 p-1 pb-0 rounded-t-md hover:cursor-pointer bg-transparent
-                    ${pageNo === page ? "border-b-[#eef7fe]" : ""}`}
+                    ${pageNo === page ? "border-b-[#e4dfa7]" : ""}`}
                 readOnly={readOnly}
                 placeholder="Untitle List" />
 

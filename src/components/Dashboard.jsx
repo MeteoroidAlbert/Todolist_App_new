@@ -137,12 +137,12 @@ function Dashboard() {
 
     return (
         <div className="w-screen h-screen flex items-center justify-center">
-            <div className="w-[500px] h-[700px] flex flex-col text-tertiary bg-gradient-to-b from-[#eef7fe] to-[#ecedff]">
+            <div className="w-[500px] h-[700px] flex flex-col text-tertiary bg-custom-image bg-center bg-yellow-300 bg-opacity-60 bg-blend-overlay">
 
                 {/*Logo與事項清單名稱*/}
-                <div className="text-left mx-8  mt-10 border-b-2 border-border">
-                    <h1 className=" text-3xl">Todo List</h1>
-                    <p className="mb-4 text-sm">Add things to do</p>
+                <div className="text-left mx-8  mt-[17px] border-b-2 border-border">
+                    <h1 className="text-red-500 text-3xl">Todo List</h1>
+                    <p className="mb-4 text-red-500 text-sm">List down ! Don't forget it !</p>
                     {/*事項清單名稱*/}
                     {Object.keys(tasks).map(pageNo =>
                         tasks[pageNo].isVisible && (
@@ -193,15 +193,15 @@ function Dashboard() {
 
                 {/*調整待辦/完成事項排序按鈕*/}
                 <div className="border-t-2 border-border text-right my-2 mx-8 p-2 pb-0  flex justify-end items-center">
-                    <p className=" font-medium">Move done things to end?</p>
-                    <button className={`w-[40px] h-5 p-1 ml-1 rounded-xl flex items-center ${moveToEnd ? "justify-end bg-secondary" : "justify-start bg-white"}`} onClick={() => setMoveToEnd(prevState => !prevState)}>
+                    <p className="mt-4 font-medium">Move done things to end?</p>
+                    <button className={`w-[40px] mt-3 h-5 p-1 ml-1 rounded-xl flex items-center ${moveToEnd ? "justify-end bg-secondary" : "justify-start bg-white"}`} onClick={() => setMoveToEnd(prevState => !prevState)}>
                         <div className={`bg-secondary w-4 h-4 rounded-full ${moveToEnd ? "hidden" : "block"}`}></div>
                         <div className={`bg-white w-4 h-4 rounded-full ${moveToEnd ? "block" : "hidden"}`}></div>
                     </button>
                 </div>
 
                 {/*清除完成事項按鈕*/}
-                <button className="mx-8 my-2 pr-2 flex justify-end" onClick={() => { setTodo([...todo.filter(item => !done.includes(item))]); setDone([]) }}>
+                <button className="mx-8 my-2 pr-2 flex justify-end text-green-600" onClick={() => { setTodo([...todo.filter(item => !done.includes(item))]); setDone([]) }}>
                     <p>Clear Completed</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 ml-2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
@@ -209,7 +209,7 @@ function Dashboard() {
                 </button>
 
                 {/*重置事項清單(todo/done/listName)*/}
-                <button className="mx-8 my-2 pr-2 flex justify-end  text-[#DB8AEF]" onClick={() => handleResetTodolist()}>
+                <button className="mx-8 my-2 pr-2 flex justify-end  text-red-500" onClick={() => handleResetTodolist()}>
                     <p>Reset Todolist</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 ml-2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -218,9 +218,9 @@ function Dashboard() {
 
                 {/*Input*/}
                 <form className="flex flex-col justify-start  mt-4 mb-4 mx-8" onSubmit={(e) => { handleAddTodo(e) }}>
-                    <div className="text-left text-lg font-medium ">Add to list</div>
+                    <div className="text-left text-lg font-medium ">Add new</div>
                     <div className="flex items-center ">
-                        <input className="rounded-md h-10 w-full mr-1" value={matter} onChange={(e) => { setMatter(e.target.value) }} />
+                        <input className="rounded-md h-10 w-full mr-1" value={matter} onChange={(e) => { setMatter(e.target.value) }} placeholder=" Type something..." />
                         {/*新增待辦事項按鈕*/}
                         <button className="border bg-primary rounded-md w-14 flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.0} stroke="white" className="size-10 p-2">

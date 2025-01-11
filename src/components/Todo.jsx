@@ -111,7 +111,7 @@ function Todo({ content, todo, done, setTodo, setDone }) {
     }
 
     return (
-        <div className="border-l-[5px] border-primary rounded-md mb-2 relative group">
+        <div className="border-l-[5px] border-primary rounded-md mb-2 relative group opacity-85">
             {/*次要功能區塊: 順序交換按鈕*/}
             <div className="absolute flex flex-col justify-between items-center -left-1 w-[4px] h-full rounded-l-md bg-primary group-hover:w-[24px] group-hover:-left-6 transition-all duration-300">
                 {/*思路: 如果代辦事項本身存在於done中，就不需要顯示順序交換按鈕*/}
