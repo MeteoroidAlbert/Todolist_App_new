@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Todo from "./Todo";
 import { useAppContext } from "./AppProvider";
 import PageTitle from "./PageTitle";
+import Cover from "./Cover";
 
 
 function Dashboard() {
@@ -137,7 +138,9 @@ function Dashboard() {
 
     return (
         <div className="w-screen h-screen flex items-center justify-center">
-            <div className="w-[500px] h-[700px] flex flex-col text-tertiary bg-custom-image bg-center bg-yellow-300 bg-opacity-60 bg-blend-overlay">
+            
+            <div className="relative w-[500px] h-[700px] flex flex-col text-tertiary bg-custom-image bg-center bg-yellow-300 bg-opacity-60 bg-blend-overlay">
+                <Cover/>
 
                 {/*Logo與事項清單名稱*/}
                 <div className="text-left mx-8  mt-[17px] border-b-2 border-border">
